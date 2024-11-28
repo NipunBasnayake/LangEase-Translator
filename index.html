@@ -10,44 +10,53 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="card shadow-lg" style="width: 100%; max-width: 500px; border-radius: 15px;">
+<body id="bodyid">
+    <div id="backgroundDiv">
+        <div class="card-header text-center bg-primary text-white p-3" style="border-radius: 15px 15px 0 0;">
+            <h3 class="fw-bold">LangEase Translator</h3>
+            <small>Bridging the Language Gap</small>
+        </div>
 
-            <div class="card-header text-center bg-primary text-white p-3" style="border-radius: 15px 15px 0 0;">
-                <h3 class="fw-bold">LangEase Translator</h3>
-                <small>Bridging the Language Gap</small>
+        <div class="card-body p-4">
+
+            <div class="mb-3">
+                <label for="txtInputText" class="form-label fw-semibold">Enter Text</label>
+                <textarea id="txtInputText" class="form-control" rows="3"
+                    placeholder="Type your text here..."></textarea>
             </div>
 
-            <div class="card-body p-4">
-                <div class="mb-3">
-                    <label for="inputText" class="form-label fw-semibold">Enter Text</label>
-                    <textarea id="txtInputText" class="form-control" rows="3" placeholder="Type your text here..."></textarea>
-                </div>
+            <div class="row g-2 mb-3">
+                <div class="col-md-5">
+                    <label for="select1" class="form-label fw-semibold">From Language</label>
+                    <select id="select1" class="form-select">
 
-                <div class="row g-2 mb-3">
-                    <div class="col-md-6">
-                        <label for="fromLanguage" class="form-label fw-semibold">From Language</label>
-                        <select id="select1" class="form-select">
-                            
-                        </select>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                    <i class="bi bi-arrow-left-right"></i>
+                </div>
+                <div class="col-md-5">
+                    <label for="select2" class="form-label fw-semibold">To Language</label>
+                    <select id="select2" class="form-select">
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="outputText" class="form-label fw-semibold">Translation</label>
+                <textarea id="outputText" class="form-control" rows="3"
+                    placeholder="Your translation will appear here..." disabled></textarea>
+                <div id="loadingSpinner" class="text-center mt-3" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <div class="col-md-6">
-                        <label for="toLanguage" class="form-label fw-semibold">To Language</label>
-                        <select id="select2" class="form-select">
-
-                        </select>
-                    </div>
                 </div>
+            </div>
 
-                <div class="mb-3">
-                    <label for="outputText" class="form-label fw-semibold">Translation</label>
-                    <textarea id="outputText" class="form-control" rows="3" placeholder="Your translation will appear here..." disabled></textarea>
-                </div>
-
-                <div class="d-grid">
-                    <button class="btn btn-primary" onclick="translates()">Translate</button>
-                </div>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-light" onclick="voice()">English Voice</button>
+                <button class="btn btn-primary" onclick="translates()">Translate</button>
             </div>
         </div>
     </div>
@@ -59,6 +68,5 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
-
 
 </html>
