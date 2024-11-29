@@ -13,59 +13,43 @@
 <body id="bodyid">
     <div id="backgroundDiv">
         <div class="card-header text-center bg-primary text-white p-3" style="border-radius: 15px 15px 0 0;">
-            <h3 class="fw-bold">LangEase Translator</h3>
-            <small>Bridging the Language Gap</small>
+            <h3 class="fw-bold">LangEase Translate</h3>
+            <!-- <small>Bridging the Language Gap</small> -->
         </div>
 
-        <div class="card-body p-4">
+        <div class="dcard-body p-4">
 
-            <div class="mb-3">
-                <label for="txtInputText" class="form-label fw-semibold">Enter Text</label>
-                <textarea id="txtInputText" class="form-control" rows="3"
-                    placeholder="Type your text here..."></textarea>
-            </div>
-
-            <div class="row g-2 mb-3">
-                <div class="col-md-5">
-                    <label for="select1" class="form-label fw-semibold">From Language</label>
-                    <select id="select1" class="form-select">
-
-                    </select>
-                </div>
-                <div class="col-md-2 d-flex justify-content-center align-items-center">
-                    <i class="bi bi-arrow-left-right"></i>
-                </div>
-                <div class="col-md-5">
-                    <label for="select2" class="form-label fw-semibold">To Language</label>
-                    <select id="select2" class="form-select">
-
-                    </select>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="outputText" class="form-label fw-semibold">Translation</label>
-                <textarea id="outputText" class="form-control" rows="3"
-                    placeholder="Your translation will appear here..." disabled></textarea>
-                <div id="loadingSpinner" class="text-center mt-3" style="display: none;">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
+            <div class="d-flex">
+                <div class="w-50 me-3">
+                    <div class="d-flex">
+                        <select id="select1" class="form-select border-0 w-50 "></select>
+                        <div id="englishButton">
+                            
+                        </div>
                     </div>
+                    <textarea id="txtInputText" class="form-control" rows="10"
+                        placeholder="Type your text here..."></textarea>
+                </div>
+
+                <div class="w-50">
+                    <select id="select2" class="form-select border-0 w-50 "></select>
+                    <textarea id="outputText" class="form-control" rows="10"
+                        placeholder="Your translation will appear here..." disabled></textarea>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-between">
+            <div class="text-center">
                 <button class="btn btn-light" onclick="voice()">English Voice</button>
-                <button class="btn btn-primary" onclick="translates()">Translate</button>
+                <button class="btn btn-primary ps-5 pe-5" onclick="translates()">Translate</button>
             </div>
+
         </div>
     </div>
 
     <script src="countries.js"></script>
     <script src="app.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        nintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
 
