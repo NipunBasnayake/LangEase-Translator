@@ -18,75 +18,8 @@ body {
     background-color: white;
 }
 
-
-.card {
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
-    background-color: #287194;
-    color: white;
-    border-radius: 15px 15px 0 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.card-header h3 {
-    font-weight: bold;
-}
-
-.card-body {
-    padding: 30px;
-}
-
-.form-control,
-.form-select {
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: #287194;
-    box-shadow: 0 0 5px rgba(40, 113, 148, 0.7);
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #023246;
-    color: white;
-}
-
-button:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(40, 113, 148, 0.7);
-}
-
-.bi-arrow-left-right {
-    font-size: 1.5rem;
-    color: #287194;
-}
-
-@media (max-width: 768px) {
-    #backgroundDiv {
-        padding: 15px;
-    }
-
-    .card {
-        width: 100%;
-    }
-
-    .form-control,
-    .form-select {
-        font-size: 0.9rem;
-    }
+#englishButton {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
 }

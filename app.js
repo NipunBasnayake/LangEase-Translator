@@ -1,41 +1,88 @@
-let selectTag = document.querySelectorAll("select");
-let outputText = document.getElementById("outputText");
+const select1 = document.getElementById("select1");
+const select2 = document.getElementById("select2");
+const txtInputText = document.getElementById("txtInputText");
+const outputText = document.getElementById("outputText");
+const loadingSpinner = document.getElementById("loadingSpinner");
+const englishButtonContainer = document.getElementById("englishButton");
 
-selectTag.forEach((tag, id) => {
-    for (let countyCode in countries) {
-        let selected;
-        if (id == 0 && countyCode == "en-GB") {
-            selected = "selected";
-        } else if (id == 1 && countyCode == "si-LK") {
-            selected = "selected";
+function populateLanguages() {
+    [select1, select2].forEach((select, index) => {
+        for (let countryCode in countries) {
+            const isSelected = (index === 0 && countryCode === "en-GB") || (index === 1 && countryCode === "si-LK");
+            const option = `<option value="${countryCode}" ${isSelected ? "selected" : ""}>${countries[countryCode]}</option>`;
+            select.insertAdjacentHTML("beforeend", option);
         }
-        let option = `<option value= "${countyCode}" ${selected}>${countries[countyCode]}</option>`
-        tag.insertAdjacentHTML("beforeend", option);
-    }
-});
+    });
+}
 
-let apiResponce;
+function updateEnglishButton() {
+    if (select1.value === "en-GB") {
+        englishButtonContainer.innerHTML = `
+                                            <button class="btn btn-light" onclick="voice()"><i class="bi bi-megaphone"></i></button>
+                                        `;
+    } else {
+        englishButtonContainer.innerHTML = ``;
+    }
+}
 
 function translates() {
-    let txtInputText = document.getElementById("txtInputText").value;
-    let select1Value = document.getElementById("select1").value;
-    let select2Value = document.getElementById("select2").value;
+    const inputText = txtInputText.value;
+    const select1Value = select1.value;
+    const select2Value = select2.value;
 
-    document.getElementById('loadingSpinner').style.display = 'block';
+    if (!inputText) {
+        outputText.value = "";
+        return;
+    }
 
-    const requestOptions = {
-        method: "GET",
-        redirect: "follow"
-    };
+    loadingSpinner.style.display = "block";
 
-    fetch(`https://api.mymemory.translated.net/get?q=${txtInputText}&langpair=${select1Value}|${select2Value}`)
+    fetch(`https://api.mymemory.translated.net/get?q=${inputText}&langpair=${select1Value}|${select2Value}`)
         .then((response) => response.json())
         .then((result) => {
-            apiResponce = result.responseData.translatedText;
-            outputText.value = apiResponce;
+            if (result.responseData && result.responseData.translatedText) {
+                outputText.value = result.responseData.translatedText;
+            } else {
+                outputText.value = "Translation not available.";
+            }
         })
-        .catch((error) => console.error(error))
+        .catch((error) => {
+            console.error("Error fetching translation:", error);
+            outputText.value = "Error translating text.";
+        })
         .finally(() => {
-            document.getElementById('loadingSpinner').style.display = 'none';
+            loadingSpinner.style.display = "none";
         });
+}
+
+txtInputText.addEventListener("input", translates);
+select1.addEventListener("change", () => {
+    updateEnglishButton();
+    translates();
+});
+select2.addEventListener("change", translates);
+
+populateLanguages();
+updateEnglishButton();
+
+
+function voice() {
+    if (select1.value === "en-GB") {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = "en-GB";
+
+        recognition.onresult = (event) => {
+            txtInputText.value = event.results[0][0].transcript;
+            charCount.textContent = `${txtInputText.value.length} / 5000`;
+            translates();
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error:", event.error);
+        };
+
+        recognition.start();
+    } else {
+        alert("Voice recognition is only available for English!");
+    }
 }
