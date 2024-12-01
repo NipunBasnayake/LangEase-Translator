@@ -22,9 +22,7 @@
                         <label for="select1" class="form-label fw-bold">From:</label>
                         <div class="d-flex align-items-center">
                             <select id="select1" class="form-select me-2"></select>
-                            <div id="englishButton" class="me-2">
-                                <button class="btn btn-light" onclick="voice()"><i class="bi bi-volume-up"></i></button>
-                            </div>
+                            <div id="englishButtonFrom" class="me-2"></div>
                         </div>
                         <textarea id="txtInputText" class="form-control mt-3" rows="8" placeholder="Type your text here..."></textarea>
                     </div>
@@ -32,6 +30,7 @@
                         <label for="select2" class="form-label fw-bold">To:</label>
                         <div class="d-flex align-items-center">
                             <select id="select2" class="form-select me-2"></select>
+                            <div id="englishButtonTo" class="me-2"></div>
                             <div id="loadingSpinner2" class="spinner-border text-primary d-none" role="status" style="width: 1rem; height: 1rem;"></div>
                         </div>
                         <textarea id="outputText" class="form-control mt-3" rows="8" placeholder="Your translation will appear here..." disabled></textarea>

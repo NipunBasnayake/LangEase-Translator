@@ -23,7 +23,7 @@ textarea:focus {
     outline: none;
 }
 
-#englishButton button {
+#englishButtonFrom button, #englishButtonTo button {
     background-color: #fff;
     border: 1px solid #007bff;
     color: #007bff;
@@ -37,7 +37,7 @@ textarea:focus {
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-#englishButton button:hover {
+#englishButtonFrom button:hover, #englishButtonTo button:hover {
     background-color: #007bff;
     color: white;
     transform: scale(1.1);

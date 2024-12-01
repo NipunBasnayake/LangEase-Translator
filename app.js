@@ -3,6 +3,8 @@ const select2 = document.getElementById("select2");
 const txtInputText = document.getElementById("txtInputText");
 const outputText = document.getElementById("outputText");
 const loadingSpinner2 = document.getElementById("loadingSpinner2");
+const englishButtonContainerFrom = document.getElementById("englishButtonFrom");
+const englishButtonContainerTo = document.getElementById("englishButtonTo");
 
 function populateLanguages() {
     [select1, select2].forEach((select, index) => {
@@ -19,6 +21,20 @@ function toggleSpinner(spinner, show) {
         spinner.classList.remove("d-none");
     } else {
         spinner.classList.add("d-none");
+    }
+}
+
+function updateEnglishButton() {
+    if (select1.value === "en-GB") {
+        englishButtonContainerFrom.innerHTML = `<button class="btn btn-light" onclick="voice('from')"><i class="bi bi-volume-up"></i></button>`;
+    } else {
+        englishButtonContainerFrom.innerHTML = '';
+    }
+
+    if (select2.value === "en-GB") {
+        englishButtonContainerTo.innerHTML = `<button class="btn btn-light" onclick="voice('to')"><i class="bi bi-volume-up"></i></button>`;
+    } else {
+        englishButtonContainerTo.innerHTML = '';
     }
 }
 
@@ -47,12 +63,14 @@ function translates() {
         });
 }
 
-function voice() {
-    const textToSpeak = txtInputText.value.trim();
+function voice(target) {
+    const textToSpeak = target === 'from' ? txtInputText.value.trim() : outputText.value.trim();
+
     if (!textToSpeak) {
         alert("Please enter some text to speak.");
         return;
     }
+
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = "en-GB";
     utterance.rate = 1;
@@ -65,7 +83,14 @@ function voice() {
 }
 
 txtInputText.addEventListener("input", translates);
-select1.addEventListener("change", translates);
-select2.addEventListener("change", translates);
+select1.addEventListener("change", () => {
+    updateEnglishButton();
+    translates();
+});
+select2.addEventListener("change", () => {
+    updateEnglishButton();
+    translates();
+});
 
 populateLanguages();
+updateEnglishButton();
