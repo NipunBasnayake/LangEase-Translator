@@ -2,8 +2,7 @@ const select1 = document.getElementById("select1");
 const select2 = document.getElementById("select2");
 const txtInputText = document.getElementById("txtInputText");
 const outputText = document.getElementById("outputText");
-const loadingSpinner = document.getElementById("loadingSpinner");
-const englishButtonContainer = document.getElementById("englishButton");
+const loadingSpinner2 = document.getElementById("loadingSpinner2");
 
 function populateLanguages() {
     [select1, select2].forEach((select, index) => {
@@ -15,13 +14,11 @@ function populateLanguages() {
     });
 }
 
-function updateEnglishButton() {
-    if (select1.value === "en-GB") {
-        englishButtonContainer.innerHTML = `
-                                            <button class="btn btn-light" onclick="voice()"><i class="bi bi-megaphone"></i></button>
-                                        `;
+function toggleSpinner(spinner, show) {
+    if (show) {
+        spinner.classList.remove("d-none");
     } else {
-        englishButtonContainer.innerHTML = ``;
+        spinner.classList.add("d-none");
     }
 }
 
@@ -35,54 +32,40 @@ function translates() {
         return;
     }
 
-    loadingSpinner.style.display = "block";
+    toggleSpinner(loadingSpinner2, true);
 
     fetch(`https://api.mymemory.translated.net/get?q=${inputText}&langpair=${select1Value}|${select2Value}`)
         .then((response) => response.json())
         .then((result) => {
-            if (result.responseData && result.responseData.translatedText) {
-                outputText.value = result.responseData.translatedText;
-            } else {
-                outputText.value = "Translation not available.";
-            }
+            outputText.value = result.responseData?.translatedText || "Translation not available.";
         })
-        .catch((error) => {
-            console.error("Error fetching translation:", error);
+        .catch(() => {
             outputText.value = "Error translating text.";
         })
         .finally(() => {
-            loadingSpinner.style.display = "none";
+            toggleSpinner(loadingSpinner2, false);
         });
 }
 
+function voice() {
+    const textToSpeak = txtInputText.value.trim();
+    if (!textToSpeak) {
+        alert("Please enter some text to speak.");
+        return;
+    }
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = "en-GB";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("Speech synthesis is not supported in this browser.");
+    }
+}
+
 txtInputText.addEventListener("input", translates);
-select1.addEventListener("change", () => {
-    updateEnglishButton();
-    translates();
-});
+select1.addEventListener("change", translates);
 select2.addEventListener("change", translates);
 
 populateLanguages();
-updateEnglishButton();
-
-
-function voice() {
-    if (select1.value === "en-GB") {
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = "en-GB";
-
-        recognition.onresult = (event) => {
-            txtInputText.value = event.results[0][0].transcript;
-            charCount.textContent = `${txtInputText.value.length} / 5000`;
-            translates();
-        };
-
-        recognition.onerror = (event) => {
-            console.error("Speech recognition error:", event.error);
-        };
-
-        recognition.start();
-    } else {
-        alert("Voice recognition is only available for English!");
-    }
-}
