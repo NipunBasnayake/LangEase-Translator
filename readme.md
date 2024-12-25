@@ -1,4 +1,4 @@
-#  **LangEase Translate**  
+#  🌍**LangEase Translate**  
 
 LangEase Translate is a **modern and interactive** web-based translation application that makes language barriers a thing of the past! 🌟 Effortlessly translate between languages and listen to your text in English with an intuitive and beautifully designed interface. 
 
