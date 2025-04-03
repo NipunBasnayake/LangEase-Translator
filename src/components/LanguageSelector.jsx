@@ -14,7 +14,6 @@ const LanguageSelector = ({
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   
-  // Get common languages to feature at the top
   const commonLanguages = ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'zh-CN', 'ja-JP', 'ru-RU', 'ar-SA'];
   
   const handleSelectLanguage = (code) => {
@@ -32,7 +31,6 @@ const LanguageSelector = ({
     const regionCode = countryCode.split('-')[1];
     if (!regionCode || regionCode.length !== 2) return '';
     
-    // Convert region code to flag emoji (using regional indicator symbols)
     const codePoints = regionCode
       .toUpperCase()
       .split('')

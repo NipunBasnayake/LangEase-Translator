@@ -1,7 +1,6 @@
 import React from 'react';
 
 const LanguageDetail = ({ languageCode, onClose }) => {
-  // These are example language details - in a real app, this data would come from an API or database
   const languageInfo = {
     'en-GB': {
       name: 'English',
@@ -77,7 +76,6 @@ const LanguageDetail = ({ languageCode, onClose }) => {
     }
   };
 
-  // Get info for the selected language or provide default info
   const info = languageInfo[languageCode] || {
     name: 'Unknown Language',
     nativeName: 'Unknown',

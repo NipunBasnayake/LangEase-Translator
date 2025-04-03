@@ -17,10 +17,8 @@ const TranslateCard = () => {
   const { translation, isLoading, error, forceTranslate } = useTranslation(inputText, fromLang, toLang);
 
   useEffect(() => {
-    // Count characters
     setCharacterCount(inputText.length);
     
-    // Count words
     if (inputText.trim() === '') {
       setWordCount(0);
     } else {
@@ -28,7 +26,6 @@ const TranslateCard = () => {
     }
   }, [inputText]);
   
-  // Save recent successful translations
   useEffect(() => {
     if (translation && inputText && !isLoading && !error) {
       const newTranslation = {
@@ -43,14 +40,12 @@ const TranslateCard = () => {
       
       setRecentTranslations(prev => {
         const updated = [newTranslation, ...prev].slice(0, 5);
-        // Save to localStorage
         localStorage.setItem('recentTranslations', JSON.stringify(updated));
         return updated;
       });
     }
   }, [translation, inputText, fromLang, toLang, isLoading, error]);
   
-  // Load recent translations from localStorage on component mount
   useEffect(() => {
     const saved = localStorage.getItem('recentTranslations');
     if (saved) {
@@ -67,7 +62,6 @@ const TranslateCard = () => {
     setFromLang(toLang);
     setToLang(tempLang);
     
-    // Force a new translation after languages are switched
     setTimeout(() => {
       forceTranslate();
     }, 100);
@@ -107,7 +101,6 @@ const TranslateCard = () => {
       
       <div className="card-body bg-white">
         <div className="row">
-          {/* From Language Section */}
           <div className="col-md-5">
             <div className="language-control">
               <LanguageSelector 
@@ -144,7 +137,6 @@ const TranslateCard = () => {
             </div>
           </div>
           
-          {/* Switch Languages Button */}
           <div className="col-md-2 d-flex align-items-center justify-content-center">
             <div className="switch-languages">
               <button 
@@ -157,7 +149,6 @@ const TranslateCard = () => {
             </div>
           </div>
           
-          {/* To Language Section */}
           <div className="col-md-5">
             <div className="language-control">
               <LanguageSelector 
@@ -205,7 +196,6 @@ const TranslateCard = () => {
                   <button 
                     className="btn btn-sm btn-outline-success"
                     onClick={() => {
-                      // Create a new "share" item
                       if (navigator.share) {
                         navigator.share({
                           title: 'LangEase Translation',
@@ -230,7 +220,6 @@ const TranslateCard = () => {
           </div>
         </div>
         
-        {/* Recent Translations */}
         {recentTranslations.length > 0 && (
           <div className="mt-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -288,15 +277,32 @@ const TranslateCard = () => {
                       </small>
                       <small className="text-muted">{new Date(item.id).toLocaleTimeString()}</small>
                     </div>
-                
+                    <div className="d-flex mt-1">
+                      <div className="pe-3" style={{ flex: 1, borderRight: '1px solid #e2e8f0' }}>
+                        <small className="text-muted d-block mb-1">Original:</small>
+                        <div className="text-truncate">
+                          <small>{item.inputText}</small>
+                        </div>
+                      </div>
+                      <div className="ps-3" style={{ flex: 1 }}>
+                        <small className="text-muted d-block mb-1">Translation:</small>
+                        <div className="text-truncate">
+                          <small>{item.translation}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         
-        {/* Footer with additional info */}
         <div className="text-center mt-4 text-muted">
           <p className="small mb-0">Powered by MyMemory Translate API</p>
-          <p className="small mb-0">Supports {Object.keys(require('../data/countries')).length} languages</p>
+          <p className="small mb-0">Supports {Object.keys(countries).length} languages</p>
         </div>
         
-        {/* Toast notification */}
         {toast && (
           <Toast 
             message={toast.message} 

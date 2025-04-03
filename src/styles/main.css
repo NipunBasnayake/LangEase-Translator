@@ -122,7 +122,6 @@ textarea:focus {
     transform: scale(0.95);
 }
 
-/* Pulse animation for speaking state */
 .btn-pulse {
     animation: pulse 1.5s infinite;
     background-color: var(--primary-color) !important;
@@ -141,7 +140,6 @@ textarea:focus {
     }
 }
 
-/* Language Selector Styling */
 .language-control {
     background-color: #f8fafc;
     border-radius: 15px;
@@ -150,12 +148,10 @@ textarea:focus {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Spinner styling */
 .spinner-border {
     color: var(--primary-color);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .card-header h1 {
         font-size: 1.5rem;
@@ -166,7 +162,6 @@ textarea:focus {
     }
 }
 
-/* Switch Languages Button */
 .switch-languages {
     display: flex;
     justify-content: center;
@@ -194,7 +189,6 @@ textarea:focus {
     transform: rotate(180deg);
 }
 
-/* Hover Button */
 .hover-button {
     background-color: transparent;
     border: none;
@@ -224,7 +218,6 @@ textarea:focus {
     max-width: 150px;
 }
 
-/* Language Detail Modal */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -319,7 +312,6 @@ textarea:focus {
     }
 }
 
-/* Animation */
 .fade-in {
     animation: fadeIn 0.5s ease;
 }
@@ -329,7 +321,6 @@ textarea:focus {
     100% { opacity: 1; }
 }
 
-/* Fade out animation */
 .fade-out {
     animation: fadeOut 0.3s ease;
     opacity: 0;
@@ -340,7 +331,6 @@ textarea:focus {
     100% { opacity: 0; }
 }
 
-/* Dark theme styles */
 .dark-theme {
     background: linear-gradient(135deg, #1e1e2f, #2d3748);
     color: #e2e8f0;
@@ -389,7 +379,6 @@ textarea:focus {
     color: #e2e8f0;
 }
 
-/* Theme toggle button */
 .theme-toggle {
     position: fixed;
     top: 20px;

@@ -10,7 +10,6 @@ const useTranslation = (inputText, fromLang, toLang) => {
     to: ''
   });
 
-  // Memoize the translate function to avoid unnecessary re-renders
   const translateText = useCallback(async (text, from, to) => {
     // If input is empty, reset translation
     if (!text) {
@@ -18,7 +17,6 @@ const useTranslation = (inputText, fromLang, toLang) => {
       return;
     }
 
-    // If it's the same text and languages as the last translation, don't re-fetch
     if (
       text === lastTranslated.text && 
       from === lastTranslated.from && 
@@ -57,7 +55,6 @@ const useTranslation = (inputText, fromLang, toLang) => {
   }, [lastTranslated]);
 
   useEffect(() => {
-    // Add a small delay to avoid too many API calls while typing
     const timeoutId = setTimeout(() => {
       translateText(inputText, fromLang, toLang);
     }, 600);
@@ -65,9 +62,7 @@ const useTranslation = (inputText, fromLang, toLang) => {
     return () => clearTimeout(timeoutId);
   }, [inputText, fromLang, toLang, translateText]);
 
-  // Function to force a translation (e.g., after switching languages)
   const forceTranslate = () => {
-    // Reset lastTranslated to force a new translation
     setLastTranslated({
       text: '',
       from: '',
